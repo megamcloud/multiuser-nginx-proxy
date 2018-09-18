@@ -1,0 +1,26 @@
+sudo: required
+
+services:
+  - docker
+
+env:
+  global:
+  - secure: "Sak9j83VM7lUearTe9NOqgVR7DF/rcQA1LgD7cDvQrntR9nIxwnjweCD3VfEYamR6Lbxc1Cak7hY1TJWeFuoah/4Eq9hjEXN1C2hGCrWVZLYWqucNBuJY8JlfZpCHEJaZCpayKWPS9GFGiLzFaE2oiKwTRRxkegaBKYKN8rToRkMrgdON2Gcvxnz5tyt29SvV6rQMZFJf35E8yxkPCR8Ea4iCRvTDakhi806RpGQOlftlvZ3g/aZ6P5iZypFJkBdw2+NG2Xz1tvGd30NMU/RzrozfIoE4Bqqpe/V28/lePzHYlys/+DFgQ8H0ytciP8Solm4LtD4Ge/2lpELWSafxA/RvdFPZbM3Dw56dImwq5q2Rn88qigbF/U3Vb8gG56KSXrZyySP0oyBP2XcE8cQ0XAUCa9lDEkVAqJJwBRKgTOVjobpA3ejNs+HrYYFz1BAcgqyHOkcdsOM7n6ogo/PA3iAPNzyxDwRMBC+TodgDGkexLZkrDy4Ha0WGK1DD8TWu/dqN+dDpu/elhO7oQV99a1oTndTa3gdqXYSiDP8KG+Rlulo+yAYuCAImuATuF/VqgMrlTX4/PQDAcQD6Nt7Enh/eTMA5fhXZCrgpk88xFgeZJxO8ZHhN6YPUS1M7BIT+axAPww2u7YFT46kzZSjpYEwmTo2XKp5T2L1I3wO9Sc="
+  - secure: "Kso36zMKA7GtSa5Qlrn66+TENFmdF86+DIKHSbmHqdhzzqZ5bDwzRRcydUW/ArOhtTE+RX2r7SS6eQbBxfTD7yKHbkpbZ3HaBIOYtOA+4h+HW/i2GRr3Ug0Qm+Bj0E1NAdnwHtLfM5WOA1JDx0H4Se9VI6QS6RFQa0cqBFKuXr1mootXweqTsRtfJlTWTQZxQJRtp9KXf6g7xjLvOlSdniEESdO1BahE9Iem2pXqbPAgD9Q8NtyGQeEPyfgcSXcEuN24X1e5F2PyuUBreGm+4z2tC37kWDZ6Ofy8dT/6gTocXWbvxZoFa/C3g8xNT+IDzxJnUNLojVo4p+h39rxFAG1YuNYiNOYfa+H62k3mtENJqncHdREM/99N3wWi0EccbVcHU0hQ2dFmKUMgY1hZVt3nqyVYwk05A6Kgpsc0nE9HXZqHu8kOTYBMXTd5FUKRxhAylOqCkUR2V4KJjtua8KpOMvUUkkDT2R2YE3PC/OK+jN6SklpELoBgAcIbWc2SYQrf06nrqH/O9YD5zHjRyLT+N9AyjbbUaOI5Q5jvTaEFKamVkovshG+NYrjk4MmekO+Bn9c9Z0ssM220H/45p1uw6jScKyT1GgxOpCC/vyplH4AneCVn+FjZPHDZxHCYYZQDW+PkEtAD8KDWL9HDulcas/yTI0oJEqDNu7uR3CQ="
+
+script:
+  - bash dockerBuild.sh
+
+# Do some informational output
+before_deploy:
+  - docker images
+
+deploy:
+  provider: script
+  script: bash dockerPush.sh
+  on:
+    branch: init
+
+# Do some informational output
+after_script:
+  - docker images
