@@ -1,6 +1,6 @@
 FROM jwilder/nginx-proxy:alpine
 
-// @TODO Add own template script that honors usernames and base domain
+# @TODO Add own template script that honors usernames and base domain
 
 RUN { \
       echo 'server_tokens off;'; \
