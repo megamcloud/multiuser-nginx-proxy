@@ -1,0 +1,15 @@
+[Unit]
+Description=Docker multi container HTTP proxy
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=30
+Restart=always
+ExecStartPre=-/usr/bin/docker stop %n
+ExecStartPre=-/usr/bin/docker rm %n
+ExecStartPre=/usr/bin/docker pull solutiondrive/multiuser-nginx-proxy
+ExecStart=/usr/bin/docker run --rm --name %n solutiondrive/multiuser-nginx-proxy
+
+[Install]
+WantedBy=multi-user.target
